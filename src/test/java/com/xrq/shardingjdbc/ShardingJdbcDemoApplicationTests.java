@@ -1,6 +1,9 @@
 package com.xrq.shardingjdbc;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xrq.shardingjdbc.entity.Course;
 import com.xrq.shardingjdbc.mapper.CourseMapper;
 import org.junit.Test;
@@ -30,5 +33,36 @@ public class ShardingJdbcDemoApplicationTests {
         }
 
     }
+
+
+    //添加课程
+    @Test
+    public void page1() {
+
+
+        Page<Course> ipage = new Page<>(2, 3);
+
+
+        QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .eq("user_id", 100);
+        IPage<Course> result = courseMapper.page1(ipage,queryWrapper);
+        System.out.println(result);
+    }
+
+    @Test
+    public void page2() {
+
+
+        Page<Course> ipage = new Page<>(2, 3);
+
+
+        QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .eq("user_id", 100);
+        IPage<Course> result = courseMapper.selectPage(ipage,queryWrapper);
+        System.out.println(result);
+    }
+
 
 }
